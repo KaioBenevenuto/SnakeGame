@@ -19,12 +19,12 @@ import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener{
 
-	private final int Largura_Tela = 650; //  largura do tabuleiro
-	private final int Altura_Tela = 650; // altura do tabuleiro
-	private final int Tamanho_Ponto = 25; // tamanho da maça
+	private final int Largura_Tela = 600; //  largura do tabuleiro
+	private final int Altura_Tela = 600; // altura do tabuleiro
+	private final int Tamanho_Ponto = 25; // tamanho dos frames, dos blocos
 	private final int Todos_Pontos = Largura_Tela * Altura_Tela / (Tamanho_Ponto * Tamanho_Ponto); // número de pontos do tabuleiro (900 = (300*300)/(10*10))
 	private final int Posicao_Aleatoria = 19; // usado para calcular uma posição aleatória
-	private final int DELAY = 450; // velocidade do game
+	private final int DELAY = 250; // velocidade do game
 	
 	private final int x_coordenada_snake[] = new int[Todos_Pontos]; // coordenadas x_coordenada_snake do snake
 	private final int y_coordenada_snake[] = new int[Todos_Pontos]; // coordenadas y_coordenada_snake do snake
@@ -56,10 +56,10 @@ public class Board extends JPanel implements ActionListener{
 	}
 
 	private void initGame() {
-		dots = 2;
+		dots = 3;
 		
-		for(int z = 0; z < dots; z++) {
-			x_coordenada_snake[z] = 50 - z * Tamanho_Ponto;//alterei de 10 para Tamanho_Ponto se não a cobra começa expremida
+		for(int z = 0; z < dots-2; z++) {
+			x_coordenada_snake[z] = 50 - z * Tamanho_Ponto;
 			y_coordenada_snake[z] = 50;
 			
 			locateApple();
