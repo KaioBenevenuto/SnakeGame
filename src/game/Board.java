@@ -45,7 +45,6 @@ public class Board extends JPanel implements ActionListener{
 	private Image head;
 	
 	private void loadImages() {	
-		//usar piskel para criar outro corpo e cabeça 
 		ImageIcon iid = new ImageIcon(getClass().getResource("corpo.png"));
 		ball = iid.getImage();
 		
