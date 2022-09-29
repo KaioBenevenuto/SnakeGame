@@ -22,7 +22,7 @@ public class Board extends JPanel implements ActionListener{
 	private final int Largura_Tela = 600; //  largura do tabuleiro
 	private final int Altura_Tela = 600; // altura do tabuleiro
 	private final int Tamanho_Ponto = 25; // tamanho dos frames, dos blocos
-	private final int Todos_Pontos = Largura_Tela * Altura_Tela / (Tamanho_Ponto * Tamanho_Ponto); // número de pontos do tabuleiro (900 = (300*300)/(10*10))
+	private final int Todos_Pontos = Largura_Tela * Altura_Tela / (Tamanho_Ponto * Tamanho_Ponto); // número de pontos do tabuleiro
 	private final int Posicao_Aleatoria = 19; // usado para calcular uma posição aleatória
 	private final int DELAY = 250; // velocidade do game
 	
