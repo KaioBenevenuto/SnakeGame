@@ -51,14 +51,24 @@ public class Board extends JPanel implements ActionListener{
 		ImageIcon iia = new ImageIcon(getClass().getResource("maca.png"));
 		apple = iia.getImage();
 		
-		ImageIcon iih = new ImageIcon(getClass().getResource("cabecaDireita.png"));
-		head = iih.getImage();
+		if(rightDirection) {
+			ImageIcon iih = new ImageIcon(getClass().getResource("cabecaDireita.png"));
+			head = iih.getImage();
+		}else if(leftDirection) {
+			ImageIcon iih = new ImageIcon(getClass().getResource("cabecaEsquerda.png"));
+			head = iih.getImage();
+		}else if(upDirection) {
+			ImageIcon iih = new ImageIcon(getClass().getResource("cabecaCima.png"));
+			head = iih.getImage();
+		}else if(downDirection) {
+			ImageIcon iih = new ImageIcon(getClass().getResource("cabecaBaixa.png"));
+			head = iih.getImage();
+		}
 	}
-
+	
 	private void initGame() {
-		dots = 3;
-		
-		for(int z = 0; z < dots-2; z++) {
+		dots = 1;
+		for(int z = 0; z < 1; z++) {
 			x_coordenada_snake[z] = 50 - z * Tamanho_Ponto;
 			y_coordenada_snake[z] = 50;
 			
@@ -66,6 +76,7 @@ public class Board extends JPanel implements ActionListener{
 		
 			timer = new Timer(DELAY, this);
 			timer.start();
+			dots = 3;
 		}
 	}	
 		
@@ -90,29 +101,25 @@ public class Board extends JPanel implements ActionListener{
 				x_coordenada_snake[z] = x_coordenada_snake[(z-1)];
 				y_coordenada_snake[z] = y_coordenada_snake[(z-1)];
 			}
-			//Deixar mais automatico, tem muita repetição
+			
 			if(leftDirection) {
 				x_coordenada_snake[0] -= Tamanho_Ponto;
-				ImageIcon iih = new ImageIcon(getClass().getResource("cabecaEsquerda.png"));
-				head = iih.getImage();
+				loadImages();
 			}
 			
 			if(rightDirection) {
 				x_coordenada_snake[0] += Tamanho_Ponto;
-				ImageIcon iih = new ImageIcon(getClass().getResource("cabecaDireita.png"));
-				head = iih.getImage();
+				loadImages();
 			}
 			
 			if(upDirection) {
 				y_coordenada_snake[0] -= Tamanho_Ponto;
-				ImageIcon iih = new ImageIcon(getClass().getResource("cabecaCima.png"));
-				head = iih.getImage();
+				loadImages();
 			}
 			
 			if(downDirection) {
 				y_coordenada_snake[0] += Tamanho_Ponto;
-				ImageIcon iih = new ImageIcon(getClass().getResource("cabecaBaixa.png"));
-				head = iih.getImage();
+				loadImages();
 			}
 			
 		}
