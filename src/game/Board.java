@@ -24,7 +24,7 @@ public class Board extends JPanel implements ActionListener{
 	private final int Tamanho_Ponto = 25; // tamanho dos frames, dos blocos
 	private final int Todos_Pontos = Largura_Tela * Altura_Tela / (Tamanho_Ponto * Tamanho_Ponto); // número de pontos do tabuleiro
 	private final int Posicao_Aleatoria = 19; // usado para calcular uma posição aleatória
-	private final int DELAY = 250; // velocidade do game
+	private final int DELAY = 200; // velocidade do game
 	
 	private final int x_coordenada_snake[] = new int[Todos_Pontos]; // coordenadas x_coordenada_snake do snake
 	private final int y_coordenada_snake[] = new int[Todos_Pontos]; // coordenadas y_coordenada_snake do snake
@@ -48,7 +48,7 @@ public class Board extends JPanel implements ActionListener{
 		ImageIcon iid = new ImageIcon(getClass().getResource("corpo.png"));
 		ball = iid.getImage();
 		
-		ImageIcon iia = new ImageIcon(getClass().getResource("maca.png"));
+		ImageIcon iia = new ImageIcon(getClass().getResource("maca2.png"));
 		apple = iia.getImage();
 		
 		if(rightDirection) {
@@ -67,7 +67,7 @@ public class Board extends JPanel implements ActionListener{
 	}
 	
 	private void initGame() {
-		dots = 1;
+		dots = 3;
 		for(int z = 0; z < 1; z++) {
 			x_coordenada_snake[z] = 50 - z * Tamanho_Ponto;
 			y_coordenada_snake[z] = 50;
@@ -76,7 +76,6 @@ public class Board extends JPanel implements ActionListener{
 		
 			timer = new Timer(DELAY, this);
 			timer.start();
-			dots = 3;
 		}
 	}	
 		
@@ -87,13 +86,19 @@ public class Board extends JPanel implements ActionListener{
 				locateApple();
 			}
 		}
-		
+
 		private void locateApple() {
 			int r = (int) (Math.random() * Posicao_Aleatoria);
 			apple_x = ((r * Tamanho_Ponto));
 			
 			r = (int) (Math.random() * Posicao_Aleatoria);
 			apple_y = ((r * Tamanho_Ponto));
+//          Preciso concertar			
+//			for(int z = dots; z > 0; z--) {
+//			    if(apple_x == x_coordenada_snake[z]) {
+//			        locateApple();
+//			    }
+//			}
 		}
 		
 		private void move() {
@@ -126,7 +131,7 @@ public class Board extends JPanel implements ActionListener{
 		
 		private void checkCollision() {
 			for(int z = dots; z > 0; z--) {
-				if((z > 4) && (x_coordenada_snake[0] == x_coordenada_snake[z] && (y_coordenada_snake[0] == y_coordenada_snake[z]))) {
+				if((z > 0) && (x_coordenada_snake[0] == x_coordenada_snake[z] && (y_coordenada_snake[0] == y_coordenada_snake[z]))) {
 					inGame = false;
 				}
 			}
