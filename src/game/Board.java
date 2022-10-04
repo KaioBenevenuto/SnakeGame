@@ -24,25 +24,30 @@ public class Board extends JPanel implements ActionListener{
 	private final int Tamanho_Ponto = 25; // tamanho dos frames, dos blocos
 	private final int Todos_Pontos = Largura_Tela * Altura_Tela / (Tamanho_Ponto * Tamanho_Ponto); // número de pontos do tabuleiro
 	private final int Posicao_Aleatoria = 19; // usado para calcular uma posição aleatória
-	private final int DELAY = 200; // velocidade do game
+	private int DELAY = 200; // velocidade do game
 	
 	private final int x_coordenada_snake[] = new int[Todos_Pontos]; // coordenadas x_coordenada_snake do snake
 	private final int y_coordenada_snake[] = new int[Todos_Pontos]; // coordenadas y_coordenada_snake do snake
+//	public int coordenada_ocupada[][] = new int[Todos_Pontos][Todos_Pontos];
 	
 	private int dots;
 	private int apple_x;
 	private int apple_y;
+	private int level =1;
+	private int score;
+	private int aux = 5;
 	
 	private boolean leftDirection = false;
 	private boolean rightDirection = true;
 	private boolean upDirection = false;
 	private boolean downDirection = false;
 	private boolean inGame = true;
-	
+
 	private Timer timer;
 	private Image ball;
 	private Image apple;
 	private Image head;
+	private String Fonte = "Calibri";
 	
 	private void loadImages() {	
 		ImageIcon iid = new ImageIcon(getClass().getResource("corpo.png"));
@@ -83,6 +88,8 @@ public class Board extends JPanel implements ActionListener{
 			if((x_coordenada_snake[0] == apple_x) && (y_coordenada_snake[0] == apple_y)) {
 				
 				dots++;
+				score++;
+				levelUp();
 				locateApple();
 			}
 		}
@@ -93,12 +100,6 @@ public class Board extends JPanel implements ActionListener{
 			
 			r = (int) (Math.random() * Posicao_Aleatoria);
 			apple_y = ((r * Tamanho_Ponto));
-//          Preciso concertar			
-//			for(int z = dots; z > 0; z--) {
-//			    if(apple_x == x_coordenada_snake[z]) {
-//			        locateApple();
-//			    }
-//			}
 		}
 		
 		private void move() {
@@ -106,7 +107,7 @@ public class Board extends JPanel implements ActionListener{
 				x_coordenada_snake[z] = x_coordenada_snake[(z-1)];
 				y_coordenada_snake[z] = y_coordenada_snake[(z-1)];
 			}
-			
+
 			if(leftDirection) {
 				x_coordenada_snake[0] -= Tamanho_Ponto;
 				loadImages();
@@ -174,7 +175,8 @@ public class Board extends JPanel implements ActionListener{
 		
 		private void doDrawing(Graphics g) {
 			if(inGame) {
-				g.drawImage(apple, apple_x, apple_y, this);
+			    
+			    g.drawImage(apple, apple_x, apple_y, this);
 				
 				for(int z = 0; z < dots; z++) {
 					if(z == 0) {
@@ -184,14 +186,33 @@ public class Board extends JPanel implements ActionListener{
 					}
 				}
 				Toolkit.getDefaultToolkit().sync();
+				
+				//Pontuação
+				g.setColor(Color.lightGray);
+				g.setFont(new Font(Fonte, Font.BOLD, 28));
+				FontMetrics metrics = getFontMetrics(g.getFont());
+				g.drawString("Score: " + (score), (Largura_Tela - metrics.stringWidth("Score: " + score))/2+225, g.getFont().getSize());
+				//Nível
+				g.setColor(Color.cyan);
+                g.setFont(new Font(Fonte, Font.BOLD, 28));
+                FontMetrics metr = getFontMetrics(g.getFont());
+				g.drawString("Level: " + level, (Largura_Tela - metr.stringWidth("Level: " + level))/2-225, g.getFont().getSize());
 			}else {
 				gameOver(g);
 			}
 		}
 		
+		public void levelUp() {
+		    if(score == aux) {
+		        level++;
+		        aux = aux+5;
+		        //DELAY = DELAY-70;
+		    }
+		}
+		
 		private void gameOver(Graphics g) {
 			String msg = "Game Over";
-			Font small = new Font("Helvetica", Font.BOLD, 14);
+			Font small = new Font("Helvetica", Font.BOLD, 38);
 			FontMetrics metr = getFontMetrics(small);
 			
 			g.setColor(Color.red);
@@ -208,7 +229,8 @@ public class Board extends JPanel implements ActionListener{
 			}
 			repaint();
 		}
-		//Classe Interna --> 
+		
+		
 		private class TAdapter implements KeyListener {
 
 			@Override
@@ -219,8 +241,9 @@ public class Board extends JPanel implements ActionListener{
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				int key = e.getKeyCode();
-				
+			    
+			    int key = e.getKeyCode();
+			    
 				if((key == KeyEvent.VK_LEFT) && (!rightDirection)) {
 					leftDirection = true;
 					upDirection = false;
@@ -244,6 +267,7 @@ public class Board extends JPanel implements ActionListener{
 					rightDirection = false;
 					leftDirection = false;
 				}
+				//39
 				
 			}
 
