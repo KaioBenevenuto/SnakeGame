@@ -24,7 +24,7 @@ public class Board extends JPanel implements ActionListener{
 	private final int Tamanho_Ponto = 25; // tamanho dos frames, dos blocos
 	private final int Todos_Pontos = Largura_Tela * Altura_Tela / (Tamanho_Ponto * Tamanho_Ponto); // número de pontos do tabuleiro
 	private final int Posicao_Aleatoria = 19; // usado para calcular uma posição aleatória
-	private int DELAY = 200; // velocidade do game
+	private int DELAY = 225; // velocidade do game
 	
 	private final int x_coordenada_snake[] = new int[Todos_Pontos]; // coordenadas x_coordenada_snake do snake
 	private final int y_coordenada_snake[] = new int[Todos_Pontos]; // coordenadas y_coordenada_snake do snake
@@ -34,6 +34,7 @@ public class Board extends JPanel implements ActionListener{
 	private int apple_x;
 	private int apple_y;
 	private int level =1;
+	private int level_passado =1;
 	private int score;
 	private int aux = 5;
 	
@@ -205,8 +206,11 @@ public class Board extends JPanel implements ActionListener{
 		public void levelUp() {
 		    if(score == aux) {
 		        level++;
-		        aux = aux+5;
-		        //DELAY = DELAY-70;
+		        aux += 5;
+		        if(level > level_passado) {
+		            timer.setDelay(DELAY-= 5);
+		            level_passado += 1;
+                }
 		    }
 		}
 		
@@ -230,13 +234,11 @@ public class Board extends JPanel implements ActionListener{
 			repaint();
 		}
 		
-		
 		private class TAdapter implements KeyListener {
 
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Stub de método gerado automaticamente
-				
 			}
 
 			@Override
@@ -267,14 +269,12 @@ public class Board extends JPanel implements ActionListener{
 					rightDirection = false;
 					leftDirection = false;
 				}
-				//39
-				
+
 			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {
 				// TODO Stub de método gerado automaticamente
-				
 			}
 						
 		}
