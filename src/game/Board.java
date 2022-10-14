@@ -9,7 +9,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -19,16 +18,15 @@ import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener{
 
-	private final int Largura_Tela = 600; //  largura do tabuleiro
-	private final int Altura_Tela = 600; // altura do tabuleiro
-	private final int Tamanho_Ponto = 25; // tamanho dos frames, dos blocos
+    final static int Largura_Tela = 600; //  largura do tabuleiro
+	final static int Altura_Tela = 600; // altura do tabuleiro
+	final static int Tamanho_Ponto = 25; // tamanho dos frames, dos blocos
 	private final int Todos_Pontos = Largura_Tela * Altura_Tela / (Tamanho_Ponto * Tamanho_Ponto); // número de pontos do tabuleiro
 	private final int Posicao_Aleatoria = 19; // usado para calcular uma posição aleatória
-	private int DELAY = 225; // velocidade do game
+	private int DELAY = 250; // velocidade do game
 	
 	private final int x_coordenada_snake[] = new int[Todos_Pontos]; // coordenadas x_coordenada_snake do snake
 	private final int y_coordenada_snake[] = new int[Todos_Pontos]; // coordenadas y_coordenada_snake do snake
-//	public int coordenada_ocupada[][] = new int[Todos_Pontos][Todos_Pontos];
 	
 	private int dots;
 	private int apple_x;
@@ -44,7 +42,7 @@ public class Board extends JPanel implements ActionListener{
 	private boolean downDirection = false;
 	private boolean inGame = true;
 
-	private Timer timer;
+	Timer timer;
 	private Image ball;
 	private Image apple;
 	private Image head;
@@ -159,7 +157,7 @@ public class Board extends JPanel implements ActionListener{
 		
 		public Board() {
 			addKeyListener(new TAdapter());
-			setBackground(Color.black);
+			setBackground(new Color(50, 60, 99));
 			setFocusable(true);
 			
 			setPreferredSize(new Dimension(Largura_Tela, Altura_Tela) );
@@ -189,12 +187,12 @@ public class Board extends JPanel implements ActionListener{
 				Toolkit.getDefaultToolkit().sync();
 				
 				//Pontuação
-				g.setColor(Color.lightGray);
+				g.setColor(Color.gray);
 				g.setFont(new Font(Fonte, Font.BOLD, 28));
 				FontMetrics metrics = getFontMetrics(g.getFont());
 				g.drawString("Score: " + (score), (Largura_Tela - metrics.stringWidth("Score: " + score))/2+225, g.getFont().getSize());
 				//Nível
-				g.setColor(Color.cyan);
+				g.setColor(Color.orange);
                 g.setFont(new Font(Fonte, Font.BOLD, 28));
                 FontMetrics metr = getFontMetrics(g.getFont());
 				g.drawString("Level: " + level, (Largura_Tela - metr.stringWidth("Level: " + level))/2-225, g.getFont().getSize());
@@ -208,20 +206,22 @@ public class Board extends JPanel implements ActionListener{
 		        level++;
 		        aux += 5;
 		        if(level > level_passado) {
-		            timer.setDelay(DELAY-= 5);
+		            timer.setDelay(DELAY-= 7);
 		            level_passado += 1;
                 }
 		    }
 		}
 		
 		private void gameOver(Graphics g) {
-			String msg = "Game Over";
+		    setBackground(Color.BLACK);
+		    String msg = "Game Over";
 			Font small = new Font("Helvetica", Font.BOLD, 38);
 			FontMetrics metr = getFontMetrics(small);
 			
 			g.setColor(Color.red);
 			g.setFont(small);
 			g.drawString(msg,(Largura_Tela - metr.stringWidth(msg)) / 2, Altura_Tela / 2);
+		
 		}
 		
 		@Override
