@@ -1,21 +1,21 @@
 package game;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+//import java.awt.Dimension;
+import java.awt.EventQueue;
+
 import javax.swing.JButton;
-import java.awt.Toolkit;
+//import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.TimeUnit;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-public class Menu extends JFrame {
+public class Menu extends Board {
 
     private JPanel contentPane;
 
@@ -37,19 +37,26 @@ public class Menu extends JFrame {
 
     /**
      * Create the frame.
+     * @return 
      */
+    
+    
+//    *public void Board(){
+//    *    super();
+//    *}
     public Menu() {
-        setTitle("SnakeGame\r\n");
-        setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\gihof\\OneDrive\\Imagens\\programação\\drive-download-20220914T180511Z-001\\cabecaBaixa.png"));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, Board.Largura_Tela, Board.Altura_Tela);
+        
+//        *setTitle("SnakeGame\r\n");
+//        *setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\gihof\\OneDrive\\Imagens\\programação\\drive-download-20220914T180511Z-001\\cabecaBaixa.png"));
+//        *setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        *setBounds(100, 100, Board.Largura_Tela, Board.Altura_Tela);
         
         contentPane = new JPanel();
         contentPane.setBackground(new Color(50, 60, 99));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setLocationRelativeTo(null);  
-        
-        setContentPane(contentPane);
+//        *setLocationRelativeTo(null);  
+//        
+//        *setContentPane(contentPane);
         GridBagLayout gbl_contentPane = new GridBagLayout();
         gbl_contentPane.columnWidths = new int[]{235, 57, 51, 0};
         gbl_contentPane.rowHeights = new int[]{23, 0, 0};
@@ -68,7 +75,7 @@ public class Menu extends JFrame {
                     }
                 });
                 setVisible(false);
-                //start
+                //start - se timer == 0, volta pro menu
             }
         });
         start.setBackground(new Color(152, 251, 152));
