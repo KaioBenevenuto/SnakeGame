@@ -16,6 +16,8 @@ public class Snake extends JFrame{
 		setTitle("SnakeGame");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
+    
 
 }

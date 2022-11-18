@@ -44,7 +44,7 @@ public class Board extends JPanel implements ActionListener {
     private boolean downDirection = false;
     private boolean inGame = true;
 
-    Timer timer;
+    static Timer timer;
     private Image ball;
     private Image apple;
     private Image head;
@@ -226,6 +226,11 @@ public class Board extends JPanel implements ActionListener {
         g.setColor(Color.red);
         g.setFont(small);
         g.drawString(msg, (Largura_Tela - metr.stringWidth(msg)) / 2, Altura_Tela / 2);
+        
+//        try{
+//            Thread.sleep(1000);
+//      }catch(Exception e){
+//      }
 
     }
     
