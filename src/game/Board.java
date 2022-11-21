@@ -14,6 +14,7 @@ import java.awt.event.KeyListener;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -44,7 +45,7 @@ public class Board extends JPanel implements ActionListener {
     private boolean downDirection = false;
     private boolean inGame = true;
 
-    static Timer timer;
+    Timer timer;
     private Image ball;
     private Image apple;
     private Image head;
@@ -202,7 +203,12 @@ public class Board extends JPanel implements ActionListener {
             g.drawString("Level: " + level, (Largura_Tela - metr.stringWidth("Level: " + level)) / 2 - 225,
                     g.getFont().getSize());
         } else {
+            ///
+            JFrame ep = new Menu();
             gameOver(g);
+            setVisible(false);
+            ep.setVisible(true);
+            
         }
     }
 

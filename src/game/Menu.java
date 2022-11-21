@@ -83,6 +83,7 @@ public class Menu extends Snake {
                     }
                     
                 });
+                ///
                 setVisible(false);
                 //start - se timer == 0, volta pro menu
             }
