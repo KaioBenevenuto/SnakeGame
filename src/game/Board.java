@@ -11,10 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -34,10 +32,7 @@ public class Board extends JPanel implements ActionListener {
     private int dots;
     private int apple_x;
     private int apple_y;
-    private int level = 1;
-    private int level_passado = 1;
     private int score;
-    private int aux = 5;
 
     private boolean leftDirection = false;
     private boolean rightDirection = true;
@@ -91,7 +86,6 @@ public class Board extends JPanel implements ActionListener {
 
             dots++;
             score++;
-            levelUp();
             locateApple();
         }
     }
@@ -196,35 +190,14 @@ public class Board extends JPanel implements ActionListener {
             FontMetrics metrics = getFontMetrics(g.getFont());
             g.drawString("Score: " + (score), (Largura_Tela - metrics.stringWidth("Score: " + score)) / 2 + 225,
                     g.getFont().getSize());
-            // Nível
-            g.setColor(Color.orange);
-            g.setFont(new Font(Fonte, Font.BOLD, 28));
-            FontMetrics metr = getFontMetrics(g.getFont());
-            g.drawString("Level: " + level, (Largura_Tela - metr.stringWidth("Level: " + level)) / 2 - 225,
-                    g.getFont().getSize());
         } else {
-            ///
-            JFrame ep = new Menu();
             gameOver(g);
-            setVisible(false);
-            ep.setVisible(true);
-            
         }
-    }
 
-    public void levelUp() {
-        if (score == aux) {
-            level++;
-            aux += 5;
-            if (level > level_passado) {
-                timer.setDelay(DELAY -= 7);
-                level_passado += 1;
-            }
-        }
     }
 
     private void gameOver(Graphics g) {
-        setBackground(Color.BLACK);
+
         String msg = "Game Over";
         Font small = new Font("Helvetica", Font.BOLD, 38);
         FontMetrics metr = getFontMetrics(small);
@@ -232,14 +205,10 @@ public class Board extends JPanel implements ActionListener {
         g.setColor(Color.red);
         g.setFont(small);
         g.drawString(msg, (Largura_Tela - metr.stringWidth(msg)) / 2, Altura_Tela / 2);
-        
-//        try{
-//            Thread.sleep(1000);
-//      }catch(Exception e){
-//      }
+        setBackground(Color.BLACK);
 
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (inGame) {
